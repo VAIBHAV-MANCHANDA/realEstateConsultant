@@ -658,6 +658,16 @@ ul {
   color: var(--gray);
 }
 
+.info-item a {
+  color: var(--gold-light);
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.info-item a:hover {
+  color: var(--gold);
+}
+
 /* Form */
 .contact-form-wrapper {
   background: var(--glass-bg);
