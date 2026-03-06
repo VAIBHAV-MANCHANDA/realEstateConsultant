@@ -448,7 +448,7 @@ ul {
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
 
@@ -569,8 +569,8 @@ ul {
 
 .why-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
 }
 
 .why-card {
@@ -666,6 +666,57 @@ ul {
 
 .info-item a:hover {
   color: var(--gold);
+}
+
+/* Phone prefix input */
+.phone-input-wrap {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid rgba(200, 164, 78, .2);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.phone-input-wrap:focus-within {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(200, 164, 78, .15);
+}
+
+.phone-prefix {
+  display: flex;
+  align-items: center;
+  padding: 0 .85rem;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--navy-dark);
+  font-weight: 700;
+  font-size: .9rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: .5px;
+}
+
+.phone-input-wrap input {
+  flex: 1;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  width: 100%;
+  padding: .8rem 1rem;
+  background: rgba(10, 22, 40, .6);
+  color: var(--white);
+  font-family: var(--ff-body);
+  font-size: .9rem;
+}
+
+.phone-input-wrap input:focus {
+  outline: none;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.phone-input-wrap input::placeholder {
+  color: rgba(160, 168, 184, .5);
 }
 
 /* Form */
@@ -918,6 +969,10 @@ ul {
   .global-stats {
     order: -1;
   }
+
+  .why-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
@@ -950,6 +1005,14 @@ ul {
 
   .about-highlights {
     grid-template-columns: 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .form-row {
