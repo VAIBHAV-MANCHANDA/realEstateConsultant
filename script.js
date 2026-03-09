@@ -10,7 +10,7 @@ const CONFIG = {
   // Your WhatsApp number (international format, no + or spaces)
   whatsappNumber: '919999048893',
   // Email that receives form queries (mailto fallback)
-  contactEmail: 'batrasatvinder@gmail.com',
+  contactEmail: 'batrasatvindersingh@gmail.com',
 };
 
 // ─────────────────────────────────────────────
