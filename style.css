@@ -900,6 +900,201 @@ ul {
   display: block;
 }
 
+/* ===================== SPECIALISED IN ===================== */
+.specialised {
+  background: var(--navy);
+}
+
+.property-types-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.property-type-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  backdrop-filter: blur(8px);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.property-type-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition);
+}
+
+.property-type-card:hover::before {
+  transform: scaleX(1);
+}
+
+.property-type-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold);
+  box-shadow: 0 20px 50px rgba(200, 164, 78, .15);
+}
+
+.property-type-icon {
+  font-size: 2.5rem;
+  margin-bottom: .4rem;
+  display: block;
+}
+
+.property-type-card h3 {
+  font-family: var(--ff-heading);
+  font-size: 1.15rem;
+  color: var(--white);
+}
+
+.property-type-card p {
+  color: var(--gray);
+  font-size: .88rem;
+  line-height: 1.65;
+  flex: 1;
+}
+
+.property-tag {
+  display: inline-block;
+  padding: .28rem .85rem;
+  border-radius: 50px;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  width: fit-content;
+  margin-top: .4rem;
+}
+
+.property-tag.residential {
+  background: rgba(72, 199, 142, .15);
+  color: #48c78e;
+  border: 1px solid rgba(72, 199, 142, .3);
+}
+
+.property-tag.commercial {
+  background: rgba(72, 145, 220, .15);
+  color: #4a9cdc;
+  border: 1px solid rgba(72, 145, 220, .3);
+}
+
+.property-tag.industrial {
+  background: rgba(255, 162, 47, .15);
+  color: #ffa22f;
+  border: 1px solid rgba(255, 162, 47, .3);
+}
+
+.property-tag.agricultural {
+  background: rgba(130, 200, 80, .15);
+  color: #82c850;
+  border: 1px solid rgba(130, 200, 80, .3);
+}
+
+/* ===================== TESTIMONIALS ===================== */
+.testimonials {
+  background: var(--navy-dark);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.testimonial-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  backdrop-filter: blur(8px);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+}
+
+.testimonial-card::after {
+  content: '\201C';
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-family: var(--ff-heading);
+  font-size: 5rem;
+  color: var(--gold);
+  opacity: .08;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(200, 164, 78, .4);
+  box-shadow: 0 16px 45px rgba(200, 164, 78, .1);
+}
+
+.testimonial-stars {
+  color: var(--gold);
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+.testimonial-text {
+  color: var(--gray);
+  font-size: .9rem;
+  line-height: 1.75;
+  font-style: italic;
+  flex: 1;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(200, 164, 78, .12);
+}
+
+.author-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--navy-dark);
+  font-weight: 700;
+  font-size: .85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: .5px;
+}
+
+.testimonial-author h4 {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: .1rem;
+}
+
+.testimonial-author span {
+  font-size: .78rem;
+  color: var(--gray);
+}
+
 /* ===================== WHATSAPP BUTTON ===================== */
 .whatsapp-btn {
   position: fixed;
@@ -973,6 +1168,14 @@ ul {
   .why-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .property-types-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
@@ -1013,6 +1216,14 @@ ul {
 
   .why-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .property-types-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
   }
 
   .form-row {
