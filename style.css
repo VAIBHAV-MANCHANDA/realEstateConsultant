@@ -1069,8 +1069,8 @@ ul {
 }
 
 .author-avatar {
-  width: 44px;
-  height: 44px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--gold), var(--gold-light));
   color: var(--navy-dark);
