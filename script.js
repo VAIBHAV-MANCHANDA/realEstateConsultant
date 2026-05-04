@@ -225,3 +225,125 @@ const sectionObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.4 });
 
 sections.forEach(s => sectionObserver.observe(s));
+
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// 10. TESTIMONIAL SLIDER
+// â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+const testimonialsTrack = document.getElementById('testimonialsTrack');
+const testimonialPrev = document.querySelector('.testimonial-prev');
+const testimonialNext = document.querySelector('.testimonial-next');
+const testimonialDots = document.getElementById('testimonialDots');
+
+if (testimonialsTrack && testimonialPrev && testimonialNext && testimonialDots) {
+  const slides = Array.from(testimonialsTrack.querySelectorAll('.testimonial-card'));
+  let currentIndex = 0;
+  let autoplayTimer = null;
+
+  function getVisibleSlides() {
+    return window.innerWidth <= 768 ? 1 : 2;
+  }
+
+  function getMaxIndex() {
+    return Math.max(0, slides.length - getVisibleSlides());
+  }
+
+  function getScrollAmount() {
+    const firstSlide = slides[0];
+    if (!firstSlide) return 0;
+
+    const trackStyles = window.getComputedStyle(testimonialsTrack);
+    const gap = parseFloat(trackStyles.columnGap || trackStyles.gap) || 0;
+    return firstSlide.offsetWidth + gap;
+  }
+
+  function updateDots() {
+    const maxIndex = getMaxIndex();
+    const safeIndex = Math.min(currentIndex, maxIndex);
+
+    testimonialDots.querySelectorAll('.testimonial-dot').forEach((dot, index) => {
+      const isActive = index === safeIndex;
+      dot.classList.toggle('active', isActive);
+      dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+    });
+  }
+
+  function updateNav() {
+    const maxIndex = getMaxIndex();
+    testimonialPrev.disabled = currentIndex === 0;
+    testimonialNext.disabled = currentIndex >= maxIndex;
+  }
+
+  function syncSlider() {
+    const maxIndex = getMaxIndex();
+    currentIndex = Math.min(currentIndex, maxIndex);
+    testimonialsTrack.scrollTo({
+      left: getScrollAmount() * currentIndex,
+      behavior: 'smooth',
+    });
+    updateDots();
+    updateNav();
+  }
+
+  function buildDots() {
+    testimonialDots.innerHTML = '';
+    const dotCount = getMaxIndex() + 1;
+
+    for (let index = 0; index < dotCount; index += 1) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'testimonial-dot';
+      dot.setAttribute('aria-label', `Go to testimonial set ${index + 1}`);
+      dot.addEventListener('click', () => {
+        currentIndex = index;
+        syncSlider();
+        restartAutoplay();
+      });
+      testimonialDots.appendChild(dot);
+    }
+  }
+
+  function goToSlide(direction) {
+    const maxIndex = getMaxIndex();
+    currentIndex = Math.max(0, Math.min(maxIndex, currentIndex + direction));
+    syncSlider();
+    restartAutoplay();
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = window.setInterval(() => {
+      const maxIndex = getMaxIndex();
+      currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
+      syncSlider();
+    }, 5000);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      window.clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  }
+
+  function restartAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+
+  testimonialPrev.addEventListener('click', () => goToSlide(-1));
+  testimonialNext.addEventListener('click', () => goToSlide(1));
+
+  testimonialsTrack.addEventListener('mouseenter', stopAutoplay);
+  testimonialsTrack.addEventListener('mouseleave', startAutoplay);
+  testimonialsTrack.addEventListener('touchstart', stopAutoplay, { passive: true });
+  testimonialsTrack.addEventListener('touchend', startAutoplay);
+
+  window.addEventListener('resize', () => {
+    buildDots();
+    syncSlider();
+  });
+
+  buildDots();
+  syncSlider();
+  startAutoplay();
+}
